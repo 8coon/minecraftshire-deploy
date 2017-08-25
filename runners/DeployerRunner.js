@@ -28,7 +28,7 @@ Object.assign(DeployerRunner.prototype, {
             // Создаём цепочку промисов
             lastPromise = lastPromise.then(() => {
                 return new Promise(resolve => {
-                    const promise = deployer[jobName]();
+                    const promise = this.deployer[jobName]();
 
                     // Деплойер правда вернул промис -- нужно дождаться его выполнения
                     if (promise && typeof promise.then === 'function') {
