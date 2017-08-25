@@ -32,7 +32,7 @@ const config = {
     /**
      * GeoDB Fetcher
      */
-    geoDB_Path: '$/api-server/assets/geo-db',
+    geoDB_Path: '$/geo-db/',
     geoDB_URL: 'https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz',
     geoDB_Deployer: GeoDBDeployer,
 
@@ -40,20 +40,14 @@ const config = {
 
 // Заменяем в конфиге $ на serverRoot
 Object.keys(config).forEach(key => {
-    if (!key.startsWith('$')) {
-        return;
-    }
-
-    config[key] = config.root + config[key].substring(1);
+    config[key] = config[key].replace('$', config.root);
 });
 
 // Создаём несуществующие директории
 Object.keys(config).forEach(key => {
-    if (!key.endsWith('Path')) {
-        return;
+    if (key.endsWith('Path') || key.endsWith('Logs')) {
+        mkdirs(config[key]);
     }
-
-    mkdirs(config[key]);
 });
 
 
