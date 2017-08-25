@@ -42,9 +42,7 @@ Object.assign(DeployerRunner.prototype, {
             });
         });
 
-        return lastPromise.then(() => {
-            this.resolve();
-        });
+        return lastPromise;
     },
 
     /**
@@ -53,9 +51,7 @@ Object.assign(DeployerRunner.prototype, {
     clear() {
         const Deployer = this.Deployer;
         this.deployer = new Deployer(this.config, this.params);
-        this.promise = new Promise((resolve, reject) => {
-            this.resolve = resolve;
-        });
+        this.promise = Promise.resolve();
     }
 
 });
