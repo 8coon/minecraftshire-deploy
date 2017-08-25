@@ -40,7 +40,9 @@ const config = {
 
 // Заменяем в конфиге $ на serverRoot
 Object.keys(config).forEach(key => {
-    config[key] = config[key].replace('$', config.root);
+    if (typeof config[key] === 'string') {
+        config[key] = config[key].replace('$', config.root);
+    }
 });
 
 // Создаём несуществующие директории
