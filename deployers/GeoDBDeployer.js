@@ -14,7 +14,7 @@ const https = require('https');
  */
 function GeoDBDeployer(config, params) {
     this.geoDBPath = config.geoDB_Path;
-    this.geoDBUrl = config.getDB_URL;
+    this.geoDBUrl = config.geoDB_URL;
     this.currentVersionPath = `${this.geoDBPath}/CurrentVersion`;
 
     // Порядок выполнения методов
