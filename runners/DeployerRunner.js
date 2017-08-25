@@ -51,7 +51,8 @@ Object.assign(DeployerRunner.prototype, {
      * Сбрасывает состояние раннера
      */
     clear() {
-        this.deployer = new (0, this.Deployer)(this.config, this.params);
+        const Deployer = this.Deployer;
+        this.deployer = new Deployer(this.config, this.params);
         this.promise = new Promise((resolve, reject) => {
             this.resolve = resolve;
         });

@@ -31,23 +31,24 @@ if (!args.tasks) {
 }
 
 
-console.log('Running tasks: ', args.tasks.join(', '));
+console.log('Running tasks:', args.tasks.join(', '));
 
 // Запускаем таски
 let lastPromise = Promise.resolve();
 args.tasks.forEach(taskName => {
+    console.log('Preparing task:', taskName, 'with deployer', `${taskName}_Deployer`);
     const runner = new DeployerRunner(config[`${taskName}_Deployer`], config, params);
 
     // Создаём цепочку промисов
     lastPromise = lastPromise.then(() => {
-        console.log('Started task ', taskName);
+        console.log('Started task:', taskName);
 
         return runner.run()
             .then(() => {
-                console.log('Finished task ', taskName);
+                console.log('Finished task:', taskName);
             })
             .catch(() => {
-                console.log('Failed task ', taskName);
+                console.log('Failed task:', taskName);
                 console.log('Aborting...');
 
                 process.exit(-1);
@@ -57,6 +58,6 @@ args.tasks.forEach(taskName => {
 
 
 lastPromise.then(() => {
-    console.log('Finished tasks: ', args.tasks.join(', '));
+    console.log('Finished tasks:', args.tasks.join(', '));
     process.exit(0);
 });
