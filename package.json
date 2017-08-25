@@ -1,6 +1,6 @@
 {
   "name": "minecraftshire-deploy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
     "args-parser": "1.1.0",
     "mkdirs": "0.0.2"
