@@ -20,6 +20,7 @@ function APIServerDeployer(config, params) {
             -jar ${this.jarPath} 
             -secret ${params.secretToken} 
             -path ${this.targetPath} 
+            -geoDB ${config.geoDB_Path} 
             -log ${this.logsPath} &`.replace('\n', '');
 
     // Порядок выполнения методов

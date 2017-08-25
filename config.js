@@ -1,5 +1,7 @@
 'use strict';
 
+const mkdirs = require('mkdirs');
+
 // Деплойеры
 const APIServerDeployer = require('./deployers/APIServerDeployer');
 
@@ -10,7 +12,7 @@ const config = {
     /**
      * Глобальный путь ко всему
      */
-    root: '/root/',
+    root: '/home/deploy',
 
     /**
      * Секретный файл со вмеси ключами
@@ -41,6 +43,15 @@ Object.keys(config).forEach(key => {
     }
 
     config[key] = config.root + config[key].substring(1);
+});
+
+// Создаём несуществующие директории
+Object.keys(config).forEach(key => {
+    if (!key.endsWith('Path')) {
+        return;
+    }
+
+    mkdirs(config[key]);
 });
 
 
