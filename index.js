@@ -47,7 +47,8 @@ args.tasks.forEach(taskName => {
             .then(() => {
                 console.log('Finished task:', taskName);
             })
-            .catch(() => {
+            .catch(err => {
+                console.error(err);
                 console.log('Failed task:', taskName);
                 console.log('Aborting...');
 
