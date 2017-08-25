@@ -27,7 +27,6 @@ if (!args.tasks) {
         }
     });
 } else {
-    console.log(JSON.stringify(args));
     args.tasks = args.tasks.split(',');
 }
 
@@ -36,7 +35,7 @@ console.log('Running tasks: ', args.tasks.join(', '));
 
 // Запускаем таски
 let lastPromise = Promise.resolve();
-args.tasks.split(',').forEach(taskName => {
+args.tasks.forEach(taskName => {
     const runner = new DeployerRunner(config[`${taskName}_Deployer`], config, params);
 
     // Создаём цепочку промисов
