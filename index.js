@@ -27,6 +27,7 @@ if (!args.tasks) {
         }
     });
 } else {
+    console.log(JSON.stringify(args));
     args.tasks = args.tasks.split(',');
 }
 
