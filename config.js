@@ -24,15 +24,15 @@ const config = {
     /**
      * API Server
      */
-    apiServer_Logs: '$/logs/api-server/',
-    apiServer_Path: '$/api-server/',
+    apiServer_Logs: '$/logs/api-server',
+    apiServer_Path: '$/api-server',
     apiServer_Deployer: APIServerDeployer,
 
 
     /**
      * GeoDB Fetcher
      */
-    geoDB_Path: '$/geo-db/',
+    geoDB_Path: '$/geo-db',
     geoDB_URL: 'https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz',
     geoDB_Deployer: GeoDBDeployer,
 
