@@ -4,6 +4,7 @@ const mkdirs = require('mkdirs');
 
 // Деплойеры
 const APIServerDeployer = require('./deployers/APIServerDeployer');
+const GeoDBDeployer = require('./deployers/GeoDBDeployer');
 
 
 // Конфиг
@@ -32,7 +33,8 @@ const config = {
      * GeoDB Fetcher
      */
     geoDB_Path: '$/api-server/assets/geo-db',
-    getDB_URL: 'https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz',
+    geoDB_URL: 'https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz',
+    geoDB_Deployer: GeoDBDeployer,
 
 };
 
