@@ -56,3 +56,5 @@ Object.assign(GeoDBDeployer.prototype, {
     }
 
 });
+
+module.exports = GeoDBDeployer;
