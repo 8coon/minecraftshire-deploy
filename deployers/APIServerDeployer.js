@@ -24,7 +24,7 @@ function APIServerDeployer(config, params) {
             -secret ${params.secretToken} 
             -path ${this.targetPath} 
             -geoDB ${config.geoDB_Path} 
-            -log ${this.logsPath} &`.replace('\n', '');
+            -log ${this.logsPath} &`.replace('\n', '').replace('\r', '');
 
     // Порядок выполнения методов
     this.order = ['stop', 'relink', 'start'];
