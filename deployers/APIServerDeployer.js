@@ -1,6 +1,8 @@
 'use strict';
 
 const fs = require('fs');
+const rmdir = require('rmdir');
+const execSync = require('child_process').execSync;
 
 
 /**
@@ -11,6 +13,7 @@ const fs = require('fs');
  */
 function APIServerDeployer(config, params) {
     this.sourcePath = params.jenkinsWorkspacePath;
+    this.sourceJarsPath = `${this.sourcePath}/target`;
     this.targetPath = config.apiServer_Path;
     this.logsPath = config.apiServer_Logs;
     this.pidPath = `${this.targetPath}/server.pid`;
@@ -60,10 +63,22 @@ Object.assign(APIServerDeployer.prototype, {
     },
 
     /**
-     * Убрать симлинк
+     * Пересоздаём симлинк
      */
-    unlink() {
-        fs.unlinkSync()
+    relink() {
+        const srcJar = fs.readdirSync(this.sourceJarsPath).find(name => name.endsWith('.jar'));
+
+        return new Promise(resolve => rmdir(this.jarPath, resolve))
+            .then(() => {
+                execSync(`ln -s "${this.sourceJarsPath}/${srcJar}" ${this.currentVersionPath}`);
+            });
+    },
+
+    /**
+     * Запускаем сервер
+     */
+    start() {
+        execSync(this.jarCommand);
     }
 
 });
