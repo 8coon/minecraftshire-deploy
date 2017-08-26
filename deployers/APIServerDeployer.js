@@ -78,6 +78,7 @@ Object.assign(APIServerDeployer.prototype, {
      * Запускаем сервер
      */
     start() {
+        console.log(this.jarCommand);
         execSync(this.jarCommand);
     }
 
