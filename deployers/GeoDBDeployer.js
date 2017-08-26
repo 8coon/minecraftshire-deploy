@@ -60,7 +60,7 @@ Object.assign(GeoDBDeployer.prototype, {
         fs.writeFileSync(`${this.geoDBPath}/version.info`, newVersion, 'utf8');
 
         // Прилинковываем в CurrentVersion
-        fs.linkSync(`${this.geoDBPath}/${newVersion}`, this.currentVersionPath);
+        execSync(`ln -s "${this.geoDBPath}/${newVersion}" this.currentVersionPath`);
     }
 
 });
