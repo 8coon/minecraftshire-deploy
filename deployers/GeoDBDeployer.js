@@ -4,6 +4,7 @@ const fs = require('fs');
 const execSync = require('child_process').execSync;
 const mkdirs = require('mkdirs');
 const https = require('https');
+const rmdir = require('rmdir');
 
 
 /**
@@ -26,19 +27,26 @@ Object.assign(GeoDBDeployer.prototype, {
 
     prepare() {
         mkdirs(this.geoDBPath);
+        const promises = [];
 
         // Если прошлая версия была прилинкована -- удалить
         if (fs.existsSync(this.currentVersionPath)) {
-            fs.unlinkSync(this.currentVersionPath);
+            promises.push(new Promise(resolve => rmdir(this.currentVersionPath, resolve)));
         }
+
+        return Promise.all(promises);
     },
 
     clear() {
+        const promises = [];
+
         fs.readdirSync(this.geoDBPath).forEach(name => {
             if (name.startsWith('GeoLite2-City_')) {
-                fs.unlinkSync(`${this.geoDBPath}/${name}`);
+                promises.push(new Promise(resolve => rmdir(`${this.geoDBPath}/${name}`, resolve)));
             }
         });
+
+        return Promise.all(promises);
     },
 
     fetch() {

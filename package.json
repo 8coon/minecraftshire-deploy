@@ -3,6 +3,7 @@
   "version": "1.0.3",
   "dependencies": {
     "args-parser": "1.1.0",
-    "mkdirs": "0.0.2"
+    "mkdirs": "0.0.2",
+    "rmdir": "1.2.0"
   }
 }
