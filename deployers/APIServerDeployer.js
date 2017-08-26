@@ -70,7 +70,7 @@ Object.assign(APIServerDeployer.prototype, {
 
         return new Promise(resolve => rmdir(this.jarPath, resolve))
             .then(() => {
-                execSync(`ln -s "${this.sourceJarsPath}/${srcJar}" ${this.currentVersionPath}`);
+                execSync(`ln -s "${this.sourceJarsPath}/${srcJar}" ${this.jarPath}`);
             });
     },
 
