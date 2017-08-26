@@ -27,7 +27,7 @@ function APIServerDeployer(config, params) {
             -log ${this.logsPath} &`.replace('\n', '');
 
     // Порядок выполнения методов
-    this.order = ['stop', 'unlink'];
+    this.order = ['stop', 'relink', 'start'];
 }
 
 
