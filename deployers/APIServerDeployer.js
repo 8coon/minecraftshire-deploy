@@ -19,11 +19,11 @@ function APIServerDeployer(config, params) {
     this.pidPath = `${this.targetPath}/server.pid`;
     this.jarPath = `${this.targetPath}/server.jar`;
 
-    this.jarCommand = `java -Xms16M -Xmx170M `
-            `-jar ${this.jarPath} `
-            `-secret ${params.secretToken} `
-            `-path ${this.targetPath} `
-            `-geoDB ${config.geoDB_Path} `
+    this.jarCommand = `java -Xms16M -Xmx170M ` +
+            `-jar ${this.jarPath} ` +
+            `-secret ${params.secretToken} ` +
+            `-path ${this.targetPath} ` +
+            `-geoDB ${config.geoDB_Path} ` +
             `-log ${this.logsPath} &`;
 
     // Порядок выполнения методов
