@@ -65,9 +65,9 @@ Object.assign(APIServerDeployer.prototype, {
      * Пересоздаём симлинк
      */
     relink() {
-        const srcJar = fs.readdirSync(this.sourceJarsPath).find(name => name.endsWith('.jar'));
+        const srcJar = fs.readdirSync(`${this.sourcePath}/target/`).find(name => name.endsWith('.jar'));
 
-        return new Promise(resolve => rmdir(this.jarPath, resolve))
+        return new Promise(resolve => rmdir(`${this.targetPath}/target/`, resolve))
             .then(() => {
                 execSync(`ln -s "${this.sourcePath}/target/${srcJar}" "${this.sourcePath}/target/server.jar"`);
                 execSync(`ln -s "${this.sourcePath}/target/" ${this.targetPath}/target/`);
