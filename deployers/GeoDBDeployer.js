@@ -41,6 +41,7 @@ Object.assign(GeoDBDeployer.prototype, {
         const promises = [];
 
         fs.readdirSync(this.geoDBPath).forEach(name => {
+            console.log(name);
             if (name.startsWith('GeoLite2-City_')) {
                 promises.push(new Promise(resolve => rmdir(`${this.geoDBPath}/${name}`, resolve)));
             }
