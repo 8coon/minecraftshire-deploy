@@ -24,7 +24,7 @@ function APIServerDeployer(config, params) {
             `-path ${this.targetPath}/target ` +
             `-geo ${config.geoDB_Path} ` +
             `-pid ${this.pidPath} ` +
-            `-log ${this.logsPath} &`;
+            `-log ${this.logsPath}/server.log &`;
 
     // Порядок выполнения методов
     this.order = ['stop', 'relink', 'start'];
