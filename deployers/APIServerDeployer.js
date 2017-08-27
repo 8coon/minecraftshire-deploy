@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const rmdir = require('rmdir');
+const mkdirs = require('mkdirs');
 const execSync = require('child_process').execSync;
 
 
@@ -71,14 +72,14 @@ Object.assign(APIServerDeployer.prototype, {
             execSync(`rm "${this.sourcePath}/target/server.jar"`);
         }
 
-        if (fs.existsSync(`${this.targetPath}/target/`)) {
-            execSync(`rm "${this.targetPath}/target/"`);
+        if (fs.existsSync(`${this.targetPath}/target`)) {
+            execSync(`rm "${this.targetPath}/target"`);
         }
 
         return new Promise(resolve => rmdir(`${this.targetPath}/target/`, resolve))
             .then(() => {
                 execSync(`ln -s "${this.sourcePath}/target/${srcJar}" "${this.sourcePath}/target/server.jar"`);
-                execSync(`ln -s "${this.sourcePath}/target/" ${this.targetPath}/target/`);
+                execSync(`ln -s "${this.sourcePath}/target/" ${this.targetPath}/target`);
             });
     },
 
