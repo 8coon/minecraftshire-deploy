@@ -73,16 +73,24 @@ Object.assign(APIServerDeployer.prototype, {
     relink() {
         const srcJar = fs.readdirSync(`${this.sourcePath}/target/`).find(name => name.endsWith('.jar'));
 
+        // Удаляем симлинк на jar сервера в Jenkins Workspace
         if (fs.existsSync(`${this.sourcePath}/target/server.jar`)) {
             execSync(`rm "${this.sourcePath}/target/server.jar"`);
         }
 
+        // Удаляем симлинк на Jenkins Workspace
         if (fs.existsSync(`${this.targetPath}/target`)) {
             execSync(`rm "${this.targetPath}/target"`);
         }
 
+        // Удаляем симлинк на assets
         if (fs.existsSync(`${this.targetPath}/assets`)) {
             execSync(`rm "${this.targetPath}/assets"`);
+        }
+
+        // Удаляем старый лог
+        if (fs.existsSync(`${this.logsPath}/server.log`)) {
+            execSync(`rm "${this.logsPath}/server.log"`);
         }
 
         return new Promise(resolve => rmdir(`${this.targetPath}/target/`, resolve))
