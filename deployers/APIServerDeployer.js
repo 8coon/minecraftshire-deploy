@@ -59,7 +59,12 @@ Object.assign(APIServerDeployer.prototype, {
         const pid = this.getPID();
         if (!pid) return;
 
-        process.kill(pid);
+        try {
+            process.kill(pid);
+        } catch (e) {
+            console.log('Unable to kill', pid);
+            console.log('Is it still running?');
+        }
     },
 
     /**
