@@ -67,6 +67,14 @@ Object.assign(APIServerDeployer.prototype, {
     relink() {
         const srcJar = fs.readdirSync(`${this.sourcePath}/target/`).find(name => name.endsWith('.jar'));
 
+        if (fs.existsSync(`${this.sourcePath}/target/server.jar`)) {
+            execSync(`rm "${this.sourcePath}/target/server.jar"`);
+        }
+
+        if (fs.existsSync(`${this.targetPath}/target/`)) {
+            execSync(`rm "${this.targetPath}/target/"`);
+        }
+
         return new Promise(resolve => rmdir(`${this.targetPath}/target/`, resolve))
             .then(() => {
                 execSync(`ln -s "${this.sourcePath}/target/${srcJar}" "${this.sourcePath}/target/server.jar"`);
@@ -78,7 +86,7 @@ Object.assign(APIServerDeployer.prototype, {
      * Запускаем сервер
      */
     start() {
-        console.log(this.jarCommand);
+        console.log('Running server:', this.jarCommand);
         execSync(this.jarCommand);
     }
 
