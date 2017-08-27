@@ -21,8 +21,8 @@ function APIServerDeployer(config, params) {
     this.jarCommand = `java -Xms16M -Xmx170M ` +
             `-jar "${this.sourcePath}/target/server.jar" ` +
             `-secret ${params.secretToken} ` +
-            `-path ${this.targetPath} ` +
-            `-geoDB ${config.geoDB_Path} ` +
+            `-path ${this.targetPath}/target ` +
+            `-geo ${config.geoDB_Path} ` +
             `-pid ${this.pidPath} ` +
             `-log ${this.logsPath} &`;
 
