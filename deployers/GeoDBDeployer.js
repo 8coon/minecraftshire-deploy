@@ -19,7 +19,7 @@ function GeoDBDeployer(config, params) {
     this.currentVersionPath = `${this.geoDBPath}/CurrentVersion`;
 
     // Порядок выполнения методов
-    this.order = ['clear', 'fetch'];
+    this.order = ['clear', /*'fetch'*/];
 }
 
 
@@ -29,6 +29,8 @@ Object.assign(GeoDBDeployer.prototype, {
         if (fs.existsSync(this.geoDBPath)) {
             return new Promise(resolve => rmdir(this.geoDBPath, resolve)).then(() => mkdirs(this.geoDBPath));
         }
+
+        mkdirs(this.geoDBPath);
     },
 
     fetch() {
