@@ -26,9 +26,9 @@ function GeoDBDeployer(config, params) {
 Object.assign(GeoDBDeployer.prototype, {
 
     clear() {
-        if (fs.existsSync(this.geoDBPath)) {
+        /*if (fs.existsSync(this.geoDBPath)) {
             return new Promise(resolve => rmdir(this.geoDBPath, resolve)).then(() => mkdirs(this.geoDBPath));
-        }
+        }*/
     },
 
     fetch() {
