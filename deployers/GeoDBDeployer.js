@@ -26,14 +26,14 @@ function GeoDBDeployer(config, params) {
 Object.assign(GeoDBDeployer.prototype, {
 
     clear() {
-        /*if (fs.existsSync(this.geoDBPath)) {
+        if (fs.existsSync(this.geoDBPath)) {
             return new Promise(resolve => rmdir(this.geoDBPath, resolve)).then(() => mkdirs(this.geoDBPath));
-        }*/
+        }
     },
 
     fetch() {
         // Загружаем и распаковываем БД
-        execSync(`cd ${this.geoDBPath} && curl ${this.geoDBUrl} | tar xvz`);
+        execSync(`cd ${this.geoDBPath} && {curl ${this.geoDBUrl} | tar xvz}`);
 
         // Находим загруженное
         const newVersion = fs.readdirSync(this.geoDBPath).find(name => name.startsWith('GeoLite2-City_'));

@@ -42,7 +42,6 @@ const config = {
 Object.keys(config).forEach(key => {
     if (typeof config[key] === 'string') {
         config[key] = config[key].replace('$', config.root);
-        console.log('Set', key, 'to', config[key]);
     }
 });
 
