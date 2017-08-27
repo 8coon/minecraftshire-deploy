@@ -89,6 +89,7 @@ Object.assign(APIServerDeployer.prototype, {
             .then(() => {
                 execSync(`ln -s "${this.sourcePath}/target/${srcJar}" "${this.sourcePath}/target/server.jar"`);
                 execSync(`ln -s "${this.sourcePath}/target/" ${this.targetPath}/target`);
+                execSync(`ln -s "${this.sourcePath}/assets/" ${this.targetPath}/assets`);
             });
     },
 
