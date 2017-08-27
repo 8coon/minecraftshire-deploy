@@ -13,17 +13,16 @@ const execSync = require('child_process').execSync;
  */
 function APIServerDeployer(config, params) {
     this.sourcePath = params.jenkinsWorkspacePath;
-    this.sourceJarsPath = `${this.sourcePath}/target`;
     this.targetPath = config.apiServer_Path;
     this.logsPath = config.apiServer_Logs;
     this.pidPath = `${this.targetPath}/server.pid`;
-    this.jarPath = `${this.targetPath}/server.jar`;
 
     this.jarCommand = `java -Xms16M -Xmx170M ` +
-            `-jar ${this.jarPath} ` +
+            `-jar "${this.sourcePath}/target/server.jar" ` +
             `-secret ${params.secretToken} ` +
             `-path ${this.targetPath} ` +
             `-geoDB ${config.geoDB_Path} ` +
+            `-pid ${this.pidPath} ` +
             `-log ${this.logsPath} &`;
 
     // Порядок выполнения методов
@@ -70,7 +69,8 @@ Object.assign(APIServerDeployer.prototype, {
 
         return new Promise(resolve => rmdir(this.jarPath, resolve))
             .then(() => {
-                execSync(`ln -s "${this.sourceJarsPath}/${srcJar}" ${this.jarPath}`);
+                execSync(`ln -s "${this.sourcePath}/target/${srcJar}" "${this.sourcePath}/target/server.jar"`);
+                execSync(`ln -s "${this.sourcePath}/target/" ${this.targetPath}/target/`);
             });
     },
 
