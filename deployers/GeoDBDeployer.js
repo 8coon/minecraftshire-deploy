@@ -33,7 +33,7 @@ Object.assign(GeoDBDeployer.prototype, {
 
     fetch() {
         // Загружаем и распаковываем БД
-        execSync(`cd ${this.geoDBPath} && {curl ${this.geoDBUrl} | tar xvz}`);
+        execSync(`eval "cd ${this.geoDBPath} \n curl ${this.geoDBUrl} | tar xvz"`);
 
         // Находим загруженное
         const newVersion = fs.readdirSync(this.geoDBPath).find(name => name.startsWith('GeoLite2-City_'));
