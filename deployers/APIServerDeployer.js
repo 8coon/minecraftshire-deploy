@@ -21,7 +21,7 @@ function APIServerDeployer(config, params) {
     this.jarCommand = `java -Xms16M -Xmx170M ` +
             `-jar "${this.sourcePath}/target/server.jar" ` +
             `-secret ${params.secretToken} ` +
-            `-path ${this.targetPath}/target ` +
+            `-path ${this.targetPath} ` +
             `-geo ${config.geoDB_Path} ` +
             `-pid ${this.pidPath} ` +
             `-log ${this.logsPath}/server.log &`;
@@ -79,6 +79,10 @@ Object.assign(APIServerDeployer.prototype, {
 
         if (fs.existsSync(`${this.targetPath}/target`)) {
             execSync(`rm "${this.targetPath}/target"`);
+        }
+
+        if (fs.existsSync(`${this.targetPath}/assets`)) {
+            execSync(`rm "${this.targetPath}/assets"`);
         }
 
         return new Promise(resolve => rmdir(`${this.targetPath}/target/`, resolve))
