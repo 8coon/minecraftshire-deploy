@@ -27,18 +27,12 @@ Object.assign(DeployerRunner.prototype, {
         (this.deployer.order || []).forEach(jobName => {
             // Создаём цепочку промисов
             lastPromise = lastPromise.then(() => {
-                return new Promise(resolve => {
-                    const promise = this.deployer[jobName]();
+                const promise = this.deployer[jobName]();
 
-                    // Деплойер правда вернул промис -- нужно дождаться его выполнения
-                    if (promise && typeof promise.then === 'function') {
-                        promise.then(() => {
-                            resolve();
-                        });
-                    } else {
-                        resolve();
-                    }
-                });
+                // Деплойер правда вернул промис -- нужно дождаться его выполнения
+                if (promise && typeof promise.then === 'function') {
+                    return promise;
+                }
             });
         });
 

@@ -120,16 +120,19 @@ Object.assign(APIServerDeployer.prototype, {
      */
     wait(timeout=60, delay=1) {
         return new Promise((resolve, reject) => {
+            let resolveTimer;
             // Реджектимся через 60 секунд, если сервер не загрузился
             const rejectTimer = setTimeout(() => {
                 console.log('Were waiting the server to load for 60s, it didn\'t -- Rejecting...');
+                clearInterval(resolveTimer);
+
                 reject();
             }, timeout * 1000);
 
             let promise = Promise.resolve();
 
             // Пингуем сервер каждые delay секунд
-            const resolveTimer = setInterval(() => {
+            resolveTimer = setInterval(() => {
                 promise = promise.then(() => new Promise(res => {
                     console.log('Making request to api/service/version...');
 
