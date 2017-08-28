@@ -1,9 +1,11 @@
 'use strict';
 
 const fs = require('fs');
+const cp = require('child_process');
 const rmdir = require('rmdir');
 const mkdirs = require('mkdirs');
 const execSync = require('child_process').execSync;
+const https = require('https');
 
 
 /**
@@ -27,7 +29,7 @@ function APIServerDeployer(config, params) {
             `-log ${this.logsPath}/server.log &`;
 
     // Порядок выполнения методов
-    this.order = ['stop', 'relink', 'start'];
+    this.order = ['stop', 'relink', 'start', 'wait'];
 }
 
 
@@ -105,9 +107,51 @@ Object.assign(APIServerDeployer.prototype, {
      * Запускаем сервер
      */
     start() {
-        console.log('Running server:', this.jarCommand);
-        execSync(this.jarCommand);
+        console.log('Running server...');
+        cp.spawn(this.jarCommand, [], {detached: true});
+    },
+
+    /**
+     * Ждём, пока сервер прогрузится и ответит нам на тестовый запрос
+     * @param timeout время ожидания загрузки
+     * @param delay перерыв между запросами
+     */
+    wait(timeout=60, delay=1) {
+        return new Promise((resolve, reject) => {
+            // Реджектимся через 60 секунд, если сервер не загрузился
+            const rejectTimer = setTimeout(() => {
+                console.log('Were waiting the server to load for 60s, it didn\'t -- Rejecting...');
+                reject();
+            }, timeout * 1000);
+
+            let promise = Promise.resolve();
+
+            // Пингуем сервер каждые delay секунд
+            const resolveTimer = setInterval(() => {
+                promise = promise.then(() => new Promise(res => {
+                    console.log('Making request to api/service/version...');
+
+                    https.get('https://minecraftshire.ru/api/service/version', result => {
+                        if (result.ok && String(result.body).startsWith('{')) {
+                            console.log('Request OK, server loaded');
+
+                            clearTimeout(rejectTimer);
+                            clearTimeout(resolveTimer);
+
+                            resolve();
+                            res();
+
+                            return;
+                        }
+
+                        console.log('Request failed');
+                        res();
+                    });
+                }))
+            }, delay * 1000);
+        });
     }
+
 
 });
 
