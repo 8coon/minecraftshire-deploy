@@ -106,11 +106,16 @@ Object.assign(APIServerDeployer.prototype, {
     /**
      * Запускаем сервер
      */
-    start() {
+    start(delay=1) {
         console.log('Running server...');
+        const server = cp.spawn('sh', [`"${this.jarCommand}"`], {detached: true, stdio: 'inherit'});
 
-        const server = cp.spawn('sh', [`"${this.jarCommand}"`], {detached: true});
-        server.unref();
+        return new Promise(resolve => {
+            setTimeout(() => {
+                server.unref();
+                resolve();
+            }, delay * 1000);
+        });
     },
 
     /**
@@ -123,7 +128,7 @@ Object.assign(APIServerDeployer.prototype, {
             let resolveTimer;
             // Реджектимся через 60 секунд, если сервер не загрузился
             const rejectTimer = setTimeout(() => {
-                console.log('Were waiting the server to load for 60s, it didn\'t -- Rejecting...');
+                console.log('Was waiting the server to load for 60s, it didn\'t -- Rejecting...');
                 clearInterval(resolveTimer);
 
                 reject();
