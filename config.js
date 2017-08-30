@@ -5,6 +5,7 @@ const mkdirs = require('mkdirs');
 // Деплойеры
 const APIServerDeployer = require('./deployers/APIServerDeployer');
 const GeoDBDeployer = require('./deployers/GeoDBDeployer');
+const PanelDeployer = require('./deployers/PanelDeployer');
 
 
 // Конфиг
@@ -49,6 +50,12 @@ const config = {
     geoDB_URL: 'https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz',
     geoDB_Deployer: GeoDBDeployer,
 
+
+    /**
+     * Panel
+     */
+    panel_Path: '$/panel',
+    panel_Deployer: PanelDeployer,
 };
 
 // Заменяем в конфиге $ на serverRoot
