@@ -141,7 +141,10 @@ Object.assign(APIServerDeployer.prototype, {
                 promise = promise.then(() => new Promise(res => {
                     console.log('Making request to api/service/version...');
 
-                    https.get('https://minecraftshire.ru/api/service/version', result => {
+                    https.request({
+                        method: 'POST',
+                        url:'https://minecraftshire.ru/api/service/version',
+                    }, result => {
                         if (result.ok && String(result.body).startsWith('{')) {
                             console.log('Request OK, server loaded');
 
@@ -154,7 +157,6 @@ Object.assign(APIServerDeployer.prototype, {
                             return;
                         }
 
-                        console.log('Request failed');
                         res();
                     });
                 }))
