@@ -34,7 +34,7 @@ Object.assign(EmailReport.prototype, {
         const to = this.sendTo;
         const bodyFile = `${this.logPath}/../message.temp`;
 
-        fs.writeFileSync(tempMessagePath, body, 'utf8');
+        fs.writeFileSync(bodyFile, body, 'utf8');
         execSync(`ruby ${__filename}/../sendmail.rb ${from} ${to} ${subject} ${bodyFile}`);
         execSync(`rm ${bodyFile}`);
     },
