@@ -106,7 +106,7 @@ Object.assign(APIServerDeployer.prototype, {
     /**
      * Запускаем сервер
      */
-    start(delay=1) {
+    start(delay=10) {
         console.log('Running server...');
         const server = cp.spawn(this.jarCommand, [], {detached: true, stdio: 'inherit', shell: true});
 
