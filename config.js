@@ -6,6 +6,7 @@ const mkdirs = require('mkdirs');
 const APIServerDeployer = require('./deployers/APIServerDeployer');
 const GeoDBDeployer = require('./deployers/GeoDBDeployer');
 const PanelDeployer = require('./deployers/PanelDeployer');
+const SinopiaDeployer = require('./deployers/SinopiaDeployer');
 
 
 // Конфиг
@@ -56,6 +57,14 @@ const config = {
      */
     panel_Path: '$/panel',
     panel_Deployer: PanelDeployer,
+
+
+    /**
+     * Sinopia
+     */
+    sinopia_Path: '$/sinopia',
+    sinopia_Deployer: SinopiaDeployer,
+
 };
 
 // Заменяем в конфиге $ на serverRoot

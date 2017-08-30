@@ -8,6 +8,9 @@ const execSync = require('child_process').execSync;
 const https = require('https');
 const http = require('http');
 
+// Утилиты
+const readPID = require('../utils/readPID');
+
 
 /**
  * Может перезапускать сервер API и создавать симлинк на него
@@ -37,29 +40,10 @@ function APIServerDeployer(config, params) {
 Object.assign(APIServerDeployer.prototype, {
 
     /**
-     * Получить PID текущего сервера
-     */
-    getPID() {
-        // PID не найден -- значит, сервер не запущен
-        if (!fs.existsSync(this.pidPath)) {
-            return null;
-        }
-
-        const pid = parseInt(fs.readFileSync(this.pidPath, 'utf8'), 10);
-
-        // Чтобы случайно не убить ничего системного
-        if (isNaN(pid) || pid < 10) {
-            return null;
-        }
-
-        return pid;
-    },
-
-    /**
      * Остановить текущий сервер
      */
     stop() {
-        const pid = this.getPID();
+        const pid = readPID(this.pidPath);
         if (!pid) return;
 
         try {
