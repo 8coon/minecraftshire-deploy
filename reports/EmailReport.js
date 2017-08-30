@@ -28,15 +28,15 @@ Object.assign(EmailReport.prototype, {
     },
 
     sendMail(subject, body) {
-        const message = `From: github-trigger-server@minecraftshire.ru\\n` +
-                `To: ${this.sendTo}\\n` +
-                `MIME-Version: 1.0\\n` +
-                `Content-Type: text/html\\n` +
-                `Subject: ${subject}\\n` +
-                `\\n` +
-                `${body}`.replace('"', '\\"').replace('\r\n', '<br>').replace('\r', '<br>').replace('\n', '<br>');
-        console.log('Message', `echo "${message}" | sendmail -t`);
-        execSync(`echo "${message}" | sendmail -t`);
+        body = body.replace('\r\n', '<br>').replace('\n\r', '<br>').replace('\r', '<br>').replace('\n', '<br>');
+
+        const from = 'github-trigger-server@minecraftshire.ru';
+        const to = this.sendTo;
+        const bodyFile = `${this.logPath}/../message.temp`;
+
+        fs.writeFileSync(tempMessagePath, body, 'utf8');
+        execSync(`ruby ${__filename}/../sendmail.rb ${from} ${to} ${subject} ${bodyFile}`);
+        execSync(`rm ${bodyFile}`);
     },
 
     /**
@@ -48,7 +48,7 @@ Object.assign(EmailReport.prototype, {
         this.sendMail(
             'Minecraftshire Build Agent',
             `<strong>${new Date()}: Build ${this.status}</strong><br>=======================<br>` +
-            `${this.readLog().replace('\n', '<br>')}<br>`
+            `${this.readLog()}<br>`
         );
     }
 
