@@ -28,12 +28,12 @@ Object.assign(EmailReport.prototype, {
     },
 
     sendMail(subject, body) {
-        const message = `From: github-trigger-server@minecraftshire.ru\n` +
-                `To: ${this.sendTo}\n` +
-                `MIME-Version: 1.0\n` +
-                `Content-Type: text/html\n` +
-                `Subject: ${subject}\n` +
-                `\n` +
+        const message = `From: github-trigger-server@minecraftshire.ru\\n` +
+                `To: ${this.sendTo}\\n` +
+                `MIME-Version: 1.0\\n` +
+                `Content-Type: text/html\\n` +
+                `Subject: ${subject}\\n` +
+                `\\n` +
                 `${body.replace('"', '\\"')}`;
         execSync(`echo "${message}" | sendmail -t`);
     },
@@ -42,6 +42,8 @@ Object.assign(EmailReport.prototype, {
      * Отправляем письмо
      */
     send() {
+        console.log('Sending report to', this.sendTo);
+
         this.sendMail(
             'Minecraftshire Build Agent',
             `<strong>${new Date()}: Build ${this.status}</strong><br>=======================<br>` +

@@ -6,6 +6,7 @@ const rmdir = require('rmdir');
 const mkdirs = require('mkdirs');
 const execSync = require('child_process').execSync;
 const https = require('https');
+const http = require('http');
 
 
 /**
@@ -141,11 +142,8 @@ Object.assign(APIServerDeployer.prototype, {
                 promise = promise.then(() => new Promise(res => {
                     console.log('Making request to api/service/version...');
 
-                    // Выключаем проверку TLS сертификата
-                    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
-                    https.request({
-                        url: 'https://minecraftshire.ru/api/service/version',
+                    http.request({
+                        url: 'http://localhost:5101/api/service/version',
                         method: 'POST',
                     }, result => {
 
