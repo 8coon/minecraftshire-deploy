@@ -10,7 +10,7 @@ def sendmail(from, to, subject, body)
 		"#{body.gsub '"', '\\"'}"
 
   %x{
-		echo "#{s}" | sendmail -t
+		echo "#{s.gsub "\u0000", ''}" | sendmail -t
 	}
 end
 
