@@ -50,7 +50,7 @@ Object.assign(SinopiaDeployer.prototype, {
 
         return new Promise(resolve => {
             setTimeout(() => {
-                server.unref();
+                sinopia.unref();
                 resolve();
             }, 5000);
         });
