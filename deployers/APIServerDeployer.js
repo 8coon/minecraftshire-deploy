@@ -165,8 +165,9 @@ Object.assign(APIServerDeployer.prototype, {
                     request.setTimeout(4000, () => {
                         console.log('Request timed out');
                         request.abort();
-                        res();
                     });
+
+                    request.on('error', res);
                 }))
             }, delay * 1000);
         });
