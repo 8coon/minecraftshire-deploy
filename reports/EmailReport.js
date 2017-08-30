@@ -31,7 +31,7 @@ Object.assign(EmailReport.prototype, {
     },
 
     sendMail(subject, body) {
-        body = body.replace('\n', '<br>');
+        body = body.replace('\r', '<br>').replace(/\[8*\[0/g, '');
 
         const from = 'github-trigger-server@minecraftshire.ru';
         const to = this.sendTo;
