@@ -8,7 +8,7 @@ const DeployerRunner = require('./runners/DeployerRunner');
 const config = require('./config');
 
 // Нотификации
-const EmailNotifier = require('./notifiers/EmailNotifier');
+const EmailReport = require('./reports/EmailReport');
 
 // Секретные параметры
 const params = JSON.parse(fs.readFileSync(config.secretConfig, 'utf8'));
@@ -53,7 +53,7 @@ args.tasks.forEach(taskName => {
                 console.log('Failed task:', taskName);
                 console.log('Aborting...');
 
-                const notifier = new EmailNotifier('BUILD FAILED', config, params);
+                new EmailReport('FAIL', params).send();
                 process.exit(-1);
             })
     });
@@ -64,6 +64,6 @@ lastPromise
     .then(() => {
         console.log('Finished tasks:', args.tasks.join(', '));
 
-        const notifier = new EmailNotifier('BUILD SUCCEEDED', config, params);
+        new EmailReport('SUCCESS', params).send();
         process.exit(0);
     });
