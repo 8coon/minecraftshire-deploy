@@ -143,7 +143,7 @@ Object.assign(APIServerDeployer.prototype, {
                     console.log('Making request to api/service/version...');
 
                     const request = http.request({
-                        url: 'http://localhost:5101/api/service/version',
+                        url: 'http://localhost:5101/service/version',
                         method: 'POST',
                     }, result => {
 
@@ -162,7 +162,11 @@ Object.assign(APIServerDeployer.prototype, {
                         res();
                     });
 
-                    request.setTimeout(2000, res);
+                    request.setTimeout(4000, () => {
+                        console.log('Request timed out');
+                        request.abort();
+                        res();
+                    });
                 }))
             }, delay * 1000);
         });

@@ -35,6 +35,7 @@ Object.assign(EmailReport.prototype, {
                 `Subject: ${subject}\\n` +
                 `\\n` +
                 `${body.replace('"', '\\"')}`;
+        console.log(message);
         execSync(`echo "${message}" | sendmail -t`);
     },
 
