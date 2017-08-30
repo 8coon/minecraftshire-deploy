@@ -17,6 +17,12 @@ const config = {
 
 
     /**
+     * Путь до Ruby
+     */
+    rubyPath: '/root/.rbenv/shims/ruby',
+
+
+    /**
      * Email для уведомлений
      */
     adminEmail: 'gpuzzletime@icloud.com',

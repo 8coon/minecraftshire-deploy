@@ -16,6 +16,7 @@ function EmailReport(status, config, params) {
     this.sendTo = config.adminEmail;
     this.workspacePath = params.jenkinsWorkspacePath;
     this.logPath = params.jenkinsLogPath;
+    this.rubyPath = config.rubyPath;
 }
 
 
@@ -36,7 +37,7 @@ Object.assign(EmailReport.prototype, {
         const bodyFile = `${this.workspacePath}/message.temp`;
 
         fs.writeFileSync(bodyFile, body, 'utf8');
-        execSync(`ruby ${__filename}/../sendmail.rb ${from} ${to} ${subject} ${bodyFile}`);
+        execSync(`${this.rubyPath} ${__filename}/../sendmail.rb ${from} ${to} ${subject} ${bodyFile}`);
         execSync(`rm ${bodyFile}`);
     },
 
