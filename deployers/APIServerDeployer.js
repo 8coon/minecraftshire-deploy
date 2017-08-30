@@ -123,7 +123,7 @@ Object.assign(APIServerDeployer.prototype, {
      * @param timeout время ожидания загрузки
      * @param delay перерыв между запросами
      */
-    wait(timeout=60, delay=1) {
+    wait(timeout=60, delay=5) {
         return new Promise((resolve, reject) => {
             let resolveTimer;
             // Реджектимся через 60 секунд, если сервер не загрузился
