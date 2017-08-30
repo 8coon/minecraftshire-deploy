@@ -16,6 +16,7 @@ function EmailReport(status, config, params) {
     this.workspacePath = params.jenkinsWorkspacePath;
     this.logPath = params.jenkinsLogPath;
     this.rubyPath = config.ruby;
+    this.silent = params.silent;
 }
 
 
@@ -42,6 +43,10 @@ Object.assign(EmailReport.prototype, {
      * Отправляем письмо
      */
     send() {
+        if (this.silent) {
+            return;
+        }
+
         console.log('Sending report to', this.sendTo);
 
         this.sendMail(
