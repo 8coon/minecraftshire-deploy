@@ -31,7 +31,7 @@ Object.assign(EmailReport.prototype, {
     },
 
     sendMail(subject, body) {
-        body = body.replace('\r\n', '<br>').replace('\n\r', '<br>').replace('\r', '<br>').replace('\n', '<br>');
+        body = body.replace('\n', '<br>');
 
         const from = 'github-trigger-server@minecraftshire.ru';
         const to = this.sendTo;
@@ -39,7 +39,7 @@ Object.assign(EmailReport.prototype, {
 
         fs.writeFileSync(bodyFile, body, 'utf8');
         execSync(`${this.rubyPath} "${path.dirname(__filename)}/sendmail.rb" "${from}" "${to}" "${subject}" "${bodyFile}"`);
-        execSync(`rm ${bodyFile}`);
+        execSync(`rm "${bodyFile}"`);
     },
 
     /**
