@@ -142,7 +142,7 @@ Object.assign(APIServerDeployer.prototype, {
                 promise = promise.then(() => new Promise(res => {
                     console.log('Making request to api/service/version...');
 
-                    http.request({
+                    const request = http.request({
                         url: 'http://localhost:5101/api/service/version',
                         method: 'POST',
                     }, result => {
@@ -161,6 +161,8 @@ Object.assign(APIServerDeployer.prototype, {
 
                         res();
                     });
+
+                    request.setTimeout(2000, res);
                 }))
             }, delay * 1000);
         });
