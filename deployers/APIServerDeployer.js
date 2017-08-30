@@ -108,7 +108,7 @@ Object.assign(APIServerDeployer.prototype, {
      */
     start(delay=1) {
         console.log('Running server...');
-        const server = cp.spawn('sh', [`"${this.jarCommand}"`], {detached: true, stdio: 'inherit'});
+        const server = cp.spawn(this.jarCommand, [], {detached: true, stdio: 'inherit', shell: true});
 
         return new Promise(resolve => {
             setTimeout(() => {
