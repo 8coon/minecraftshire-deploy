@@ -142,17 +142,15 @@ Object.assign(APIServerDeployer.prototype, {
                     console.log('Making request to api/service/version...');
 
                     // Временно выключаем проверку TLS сертификата
-                    const lastReject = process.env.NODE_TLS_REJECT_UNAUTHORIZED;
-                    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+                    //const lastReject = process.env.NODE_TLS_REJECT_UNAUTHORIZED;
+                    //process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
                     https.request({
-                        host: 'minecraftshire.ru',
-                        port: 443,
-                        path: '/api/service/version',
+                        url: 'https://minecraftshire.ru/api/service/version',
                         method: 'POST',
                     }, result => {
                         // Возвращаем проверку, как было
-                        process.env.NODE_TLS_REJECT_UNAUTHORIZED = lastReject;
+                        //process.env.NODE_TLS_REJECT_UNAUTHORIZED = lastReject;
 
                         if (result.ok && String(result.body).startsWith('{')) {
                             console.log('Request OK, server loaded');
