@@ -30,7 +30,7 @@ function APIServerDeployer(config, params) {
             `-log ${this.logsPath}/server.log &`;
 
     // Порядок выполнения методов
-    this.order = ['stop', 'relink', 'start', 'wait'];
+    this.order = ['stop', 'relink', 'start'];
 }
 
 
@@ -119,6 +119,8 @@ Object.assign(APIServerDeployer.prototype, {
         });
     },
 
+    // НЕ ИСПОЛЬЗУЕТСЯ
+    // Todo: Починить
     /**
      * Ждём, пока сервер прогрузится и ответит нам на тестовый запрос
      * @param timeout время ожидания загрузки
