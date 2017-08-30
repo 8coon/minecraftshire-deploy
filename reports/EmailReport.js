@@ -34,9 +34,9 @@ Object.assign(EmailReport.prototype, {
                 `Content-Type: text/html\\n` +
                 `Subject: ${subject}\\n` +
                 `\\n` +
-                `${body}`;
-        console.log('Message', `echo "${message.replace('"', '\\"')}" | sendmail -t`);
-        execSync(`echo "${message.replace('"', '\\"')}" | sendmail -t`);
+                `${body}`.replace('"', '\\"').replace('\r\n', '<br>').replace('\r', '<br>').replace('\n', '<br>');
+        console.log('Message', `echo "${message}" | sendmail -t`);
+        execSync(`echo "${message}" | sendmail -t`);
     },
 
     /**
