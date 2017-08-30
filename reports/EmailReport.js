@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 const path = require('path');
@@ -31,7 +29,8 @@ Object.assign(EmailReport.prototype, {
     },
 
     sendMail(subject, body) {
-        body = body.replace('\r', '<br>').replace(/\[8*\[0/g, '');
+        console.log(body.indexOf('\n'), body.indexOf('\r'), body.indexOf('\n\r'), body.indexOf('\033'));
+        body = body.replace('\n', '<br>').replace(/\[8*\[0/g, '');
 
         const from = 'github-trigger-server@minecraftshire.ru';
         const to = this.sendTo;
