@@ -14,6 +14,7 @@ const execSync = require('child_process').execSync;
 function EmailReport(status, config, params) {
     this.status = status;
     this.sendTo = config.adminEmail;
+    this.workspacePath = params.jenkinsWorkspacePath;
     this.logPath = params.jenkinsLogPath;
 }
 
@@ -32,7 +33,7 @@ Object.assign(EmailReport.prototype, {
 
         const from = 'github-trigger-server@minecraftshire.ru';
         const to = this.sendTo;
-        const bodyFile = `${this.logPath}/../message.temp`;
+        const bodyFile = `${this.workspacePath}/message.temp`;
 
         fs.writeFileSync(bodyFile, body, 'utf8');
         execSync(`ruby ${__filename}/../sendmail.rb ${from} ${to} ${subject} ${bodyFile}`);
