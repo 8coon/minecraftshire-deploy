@@ -15,6 +15,13 @@ const config = {
      */
     root: '/home/deploy',
 
+
+    /**
+     * Email для уведомлений
+     */
+    adminEmail: 'gpuzzletime@icloud.com',
+
+
     /**
      * Секретный файл со вмеси ключами
      */

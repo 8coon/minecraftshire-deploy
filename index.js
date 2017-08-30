@@ -53,7 +53,7 @@ args.tasks.forEach(taskName => {
                 console.log('Failed task:', taskName);
                 console.log('Aborting...');
 
-                new EmailReport('FAIL', params).send();
+                new EmailReport('FAIL', config, params).send();
                 process.exit(-1);
             })
     });
@@ -64,6 +64,6 @@ lastPromise
     .then(() => {
         console.log('Finished tasks:', args.tasks.join(', '));
 
-        new EmailReport('SUCCESS', params).send();
+        new EmailReport('SUCCESS', config, params).send();
         process.exit(0);
     });
