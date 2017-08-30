@@ -7,7 +7,7 @@ def sendmail(from, to, subject, body)
 		"Content-Type: text/html\\n"\
 		"Subject: #{subject}\\n"\
 		"\\n"\
-		"#{body.gsub '"', '\\"'}"
+		"#{body.gsub('"', '\\"').gsub("\n", '<br>')}"
 
   %x{
 		echo "#{s.gsub "\u0000", ''}" | sendmail -t
