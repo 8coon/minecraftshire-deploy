@@ -39,7 +39,7 @@ Object.assign(EmailReport.prototype, {
 
         fs.writeFileSync(bodyFile, body, 'utf8');
         execSync(`${this.rubyPath} "${path.dirname(__filename)}/sendmail.rb" "${from}" "${to}" "${subject}" "${bodyFile}"`);
-        execSync(`rm "${bodyFile}"`);
+        // execSync(`rm "${bodyFile}"`);
     },
 
     /**
@@ -50,7 +50,7 @@ Object.assign(EmailReport.prototype, {
 
         this.sendMail(
             'Minecraftshire Build Agent',
-            `<strong>${new Date()}: Build ${this.status}</strong><br>=======================<br>` +
+            `<strong>Build ${this.status}: ${new Date()}</strong><br>=======================<br>` +
             `${this.readLog()}<br>`
         );
     }
