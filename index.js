@@ -43,22 +43,20 @@ args.tasks.forEach(taskName => {
     lastPromise = lastPromise.then(() => {
         console.log('Started task:', taskName);
 
-        return runner.run()
-            .then(() => {
-                console.log('Finished task:', taskName);
-            })
-            .catch(err => {
-                console.error(err);
-                console.log('Failed task:', taskName);
-                console.log('Aborting...');
-
-                process.exit(-1);
-            });
+        return runner.run().then(() => console.log('Finished task:', taskName));
     });
 });
 
 
-lastPromise.then(() => {
-    console.log('Finished tasks:', args.tasks.join(', '));
-    process.exit(0);
-});
+lastPromise
+    .then(() => {
+        console.log('Finished tasks:', args.tasks.join(', '));
+
+        process.exit(0);
+    }).catch(err => {
+        console.error(err);
+        console.log('Failed task:', taskName);
+        console.log('Aborting...');
+
+        process.exit(-1);
+    });
