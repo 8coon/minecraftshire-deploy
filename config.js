@@ -7,6 +7,7 @@ const APIServerDeployer = require('./deployers/APIServerDeployer');
 const GeoDBDeployer = require('./deployers/GeoDBDeployer');
 const PanelDeployer = require('./deployers/PanelDeployer');
 const SinopiaDeployer = require('./deployers/SinopiaDeployer');
+const JSUtilsDeployer = require('./deployers/JSUtilsDeployer');
 
 
 // Конфиг
@@ -37,6 +38,12 @@ const config = {
 
 
     /**
+     * Путь до файла с версиями опубликованных пакетов
+     */
+    version_Path: '$/published-packages.json',
+
+
+    /**
      * API Server
      */
     apiServer_Logs: '$/logs/api-server',
@@ -64,6 +71,12 @@ const config = {
      */
     sinopia_Path: '$/sinopia',
     sinopia_Deployer: SinopiaDeployer,
+
+
+    /**
+     * JS Utils
+     */
+    jsUtils_Deployer: JSUtilsDeployer,
 
 };
 
