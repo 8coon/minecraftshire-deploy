@@ -19,7 +19,7 @@ const config = {
     /**
      * Путь до Ruby
      */
-    rubyPath: '/root/.rbenv/shims/ruby',
+    ruby: '/root/.rbenv/shims/ruby',
 
 
     /**

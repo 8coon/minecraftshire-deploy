@@ -16,7 +16,7 @@ function EmailReport(status, config, params) {
     this.sendTo = config.adminEmail;
     this.workspacePath = params.jenkinsWorkspacePath;
     this.logPath = params.jenkinsLogPath;
-    this.rubyPath = config.rubyPath;
+    this.rubyPath = config.ruby;
 }
 
 
