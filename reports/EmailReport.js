@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const execSync = require('child_process').execSync;
+const path = require('path');
 
 
 /**
@@ -37,7 +38,7 @@ Object.assign(EmailReport.prototype, {
         const bodyFile = `${this.workspacePath}/message.temp`;
 
         fs.writeFileSync(bodyFile, body, 'utf8');
-        execSync(`${this.rubyPath} ${__filename}/../sendmail.rb ${from} ${to} ${subject} ${bodyFile}`);
+        execSync(`${this.rubyPath} "${path.dirname(__filename)}/sendmail.rb" "${from}" "${to}" "${subject}" "${bodyFile}"`);
         execSync(`rm ${bodyFile}`);
     },
 
