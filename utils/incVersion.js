@@ -56,4 +56,6 @@ module.exports = (config, packagePath) => {
 
     fs.writeFileSync(packagePath, JSON.stringify(pkg), 'utf8');
     fs.writeFileSync(cacheFile, JSON.stringify(versions), 'utf8');
+
+    console.log('Package', name, 'was upgraded to', versions[name]);
 };
