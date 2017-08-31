@@ -26,6 +26,8 @@ const serializeVersion = (version) => {
  * @param {string} packagePath путь до package.json
  */
 module.exports = (config, packagePath) => {
+    const cacheFile = `${config.version_Path}/${config.version_File}`;
+
     const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
     const name = pkg.name;
     const version = pkg.version || '0.0.$';
@@ -33,7 +35,7 @@ module.exports = (config, packagePath) => {
     // Читаем файл с прошлыми версиями пакетов
     let versions = {};
     if (fs.existsSync(config.version_Path)) {
-        versions = JSON.parse(fs.readFileSync(config.version_Path, 'utf8'));
+        versions = JSON.parse(fs.readFileSync(cacheFile, 'utf8'));
     }
 
     versions[name] = versions[name] || version.replace('$', '0');
@@ -53,5 +55,5 @@ module.exports = (config, packagePath) => {
     pkg.version = versions[name];
 
     fs.writeFileSync(packagePath, JSON.stringify(pkg), 'utf8');
-    fs.writeFileSync(config.version_Path, JSON.stringify(versions), 'utf8');
+    fs.writeFileSync(cacheFile, JSON.stringify(versions), 'utf8');
 };

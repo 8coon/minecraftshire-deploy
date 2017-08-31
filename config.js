@@ -40,7 +40,8 @@ const config = {
     /**
      * Путь до файла с версиями опубликованных пакетов
      */
-    version_Path: '$/published-packages.json',
+    version_Path: '$',
+    version_File: 'published-packages.json',
 
 
     /**
