@@ -28,7 +28,7 @@ Object.assign(JSUtilsDeployer.prototype, {
      */
     publish() {
         incVersion(this.config, `${this.workspacePath}/package.json`);
-        execSync(`cd "${this.workspacePath}" && npm publish && git reset --HARD`);
+        execSync(`cd "${this.workspacePath}" && npm publish && git reset --hard`);
     },
 
 });
