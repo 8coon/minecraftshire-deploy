@@ -8,6 +8,7 @@ const GeoDBDeployer = require('./deployers/GeoDBDeployer');
 const PanelDeployer = require('./deployers/PanelDeployer');
 const SinopiaDeployer = require('./deployers/SinopiaDeployer');
 const JSUtilsDeployer = require('./deployers/JSUtilsDeployer');
+const JSAPIDeployer = require('./deployers/JSAPIDeployer');
 
 
 // Конфиг
@@ -78,6 +79,12 @@ const config = {
      * JS Utils
      */
     jsUtils_Deployer: JSUtilsDeployer,
+
+
+    /**
+     * JS API
+     */
+    jsAPI_Deployer: JSAPIDeployer,
 
 };
 
