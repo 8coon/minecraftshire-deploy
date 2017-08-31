@@ -34,7 +34,7 @@ module.exports = (config, packagePath) => {
 
     // Читаем файл с прошлыми версиями пакетов
     let versions = {};
-    if (fs.existsSync(config.version_Path)) {
+    if (fs.existsSync(cacheFile)) {
         versions = JSON.parse(fs.readFileSync(cacheFile, 'utf8'));
     }
 
