@@ -10,11 +10,11 @@ const execSync = require('child_process').execSync;
  */
 module.exports = (path, version) => {
     execSync(`cd "${path}" && ` +
-        +`git add * && ` +
-        +`git commit -m "Version ${version}" && `
-        +`git push && ` +
-        +`git checkout -b ${version} && ` +
-        +`git push -u origin ${version} && ` +
-        +`git checkout master`
+        `git add * && ` +
+        `git commit -m "Version ${version}" && `
+        `git push && ` +
+        `git checkout -b ${version} && ` +
+        `git push -u origin ${version} && ` +
+        `git checkout master`
     );
 };
