@@ -4,6 +4,7 @@ const execSync = require('child_process').execSync;
 
 // Утилиты
 const incVersion = require('../utils/incVersion');
+const gitDeploy = require('../utils/gitDeploy');
 
 
 /**
@@ -27,8 +28,8 @@ Object.assign(JSAPIDeployer.prototype, {
      * Меняем версию пакета, публикуем его, сбрасываем изменения
      */
     publish() {
-        incVersion(this.config, `${this.workspacePath}/package.json`);
-        execSync(`cd "${this.workspacePath}" && npm publish && git reset --hard`);
+        const version = incVersion(this.config, `${this.workspacePath}/package.json`);
+        gitDeploy(this.workspacePath, version);
     },
 
 });
