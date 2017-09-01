@@ -15,11 +15,12 @@ module.exports = (path, version) => {
     fs.writeFileSync(`${path}/package.json`, JSON.stringify(pkg), 'utf8');
 
     execSync(`cd "${path}" && ` +
-        `git add * && ` +
+        `git add package.json && ` +
         `git commit -m "Version ${version}" && ` +
         `git push && ` +
         `git checkout -b ${version} && ` +
         `git push -u origin ${version} && ` +
-        `git checkout master`
+        `git checkout master && ` +
+        `git pull`
     );
 };
