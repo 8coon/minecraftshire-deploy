@@ -1,6 +1,7 @@
 'use strict';
 
 const execSync = require('child_process').execSync;
+const fs = require('fs');
 
 
 /**
@@ -9,6 +10,10 @@ const execSync = require('child_process').execSync;
  * @param {string} version
  */
 module.exports = (path, version) => {
+    const pkg = JSON.parse(fs.readFileSync(`${path}/package.json`, 'utf8'));
+    pkg.version = version;
+    fs.writeFileSync(`${path}/package.json`, JSON.stringify(pkg), 'utf8');
+
     execSync(`cd "${path}" && ` +
         `git add * && ` +
         `git commit -m "Version ${version}" && ` +
