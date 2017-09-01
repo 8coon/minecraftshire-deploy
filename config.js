@@ -6,7 +6,6 @@ const mkdirs = require('mkdirs');
 const APIServerDeployer = require('./deployers/APIServerDeployer');
 const GeoDBDeployer = require('./deployers/GeoDBDeployer');
 const PanelDeployer = require('./deployers/PanelDeployer');
-const SinopiaDeployer = require('./deployers/SinopiaDeployer');
 const JSUtilsDeployer = require('./deployers/JSUtilsDeployer');
 const JSAPIDeployer = require('./deployers/JSAPIDeployer');
 
@@ -66,13 +65,6 @@ const config = {
      */
     panel_Path: '$/panel',
     panel_Deployer: PanelDeployer,
-
-
-    /**
-     * Sinopia
-     */
-    sinopia_Path: '$/sinopia',
-    sinopia_Deployer: SinopiaDeployer,
 
 
     /**
