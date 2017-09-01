@@ -2,10 +2,6 @@
 
 const execSync = require('child_process').execSync;
 
-// Утилиты
-const incVersion = require('../utils/incVersion');
-const gitDeploy = require('../utils/gitDeploy');
-
 
 /**
  * Паблишер JS Utils
@@ -28,8 +24,6 @@ Object.assign(JSUtilsDeployer.prototype, {
      * Меняем версию пакета, публикуем его, сбрасываем изменения
      */
     publish() {
-        const version = incVersion(this.config, `${this.workspacePath}/package.json`);
-        gitDeploy(this.workspacePath, version);
     },
 
 });
