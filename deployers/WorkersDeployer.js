@@ -26,7 +26,7 @@ Object.assign(WorkersDeployer.prototype, {
         const dstRepo = this.mavenPath;
 
         console.log(`Copying "${srcRepo}" to "${dstRepo}"...`);
-        execSync(`rsync -a "${dstRepo}" "${srcRepo}"`);
+        execSync(`rsync -a "${srcRepo}/" "${dstRepo}/"`);
     },
 
 });
