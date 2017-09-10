@@ -83,7 +83,7 @@ const config = {
     /**
      * Kaibito Workers
      */
-    workers_Deployer: JSAPIDeployer,
+    workers_Deployer: WorkersDeployer,
 
 
     /**
