@@ -8,6 +8,7 @@ const GeoDBDeployer = require('./deployers/GeoDBDeployer');
 const PanelDeployer = require('./deployers/PanelDeployer');
 const JSUtilsDeployer = require('./deployers/JSUtilsDeployer');
 const JSAPIDeployer = require('./deployers/JSAPIDeployer');
+const WorkersDeployer = require('./deployers/WorkersDeployer');
 
 
 // Конфиг
@@ -77,6 +78,18 @@ const config = {
      * JS API
      */
     jsAPI_Deployer: JSAPIDeployer,
+
+
+    /**
+     * Kaibito Workers
+     */
+    workers_Deployer: JSAPIDeployer,
+
+
+    /**
+     * Maven репозиторий
+     */
+    maven_Path: '$/maven',
 
 };
 
