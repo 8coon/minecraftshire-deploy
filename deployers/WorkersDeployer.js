@@ -19,7 +19,7 @@ function WorkersDeployer(config, params) {
 }
 
 
-Object.assign(JVAPIDeployer.prototype, {
+Object.assign(WorkersDeployer.prototype, {
 
     copy() {
         const srcRepo = `${this.workspacePath}/target/mvn-repo`;
