@@ -19,7 +19,7 @@ function MultigramAPIDeployer(config, params) {
 }
 
 
-Object.assign(MultigramAPI.prototype, {
+Object.assign(MultigramAPIDeployer.prototype, {
 
     copy() {
         const srcRepo = `${this.workspacePath}/target/mvn-repo`;
@@ -31,4 +31,4 @@ Object.assign(MultigramAPI.prototype, {
 
 });
 
-module.exports = MultigramAPI;
+module.exports = MultigramAPIDeployer;
