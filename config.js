@@ -9,6 +9,7 @@ const PanelDeployer = require('./deployers/PanelDeployer');
 const JSUtilsDeployer = require('./deployers/JSUtilsDeployer');
 const JSAPIDeployer = require('./deployers/JSAPIDeployer');
 const WorkersDeployer = require('./deployers/WorkersDeployer');
+const MultigramServerDeployer = require('./deployers/MultigramServerDeployer');
 
 
 // Конфиг
@@ -85,6 +86,13 @@ const config = {
      */
     workers_Deployer: WorkersDeployer,
 
+
+    /**
+     * Multigram Server
+     */
+    multigramServer_Deployer: MultigramServerDeployer,
+    multigramServer_Logs: '$/logs/multigram-server',
+    multigramServer_Path: '$/multigram-server',
 
     /**
      * Maven репозиторий
