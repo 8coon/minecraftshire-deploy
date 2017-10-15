@@ -20,9 +20,10 @@ const readPID = require('../utils/readPID');
  */
 function MultigramServerDeployer(config, params) {
     this.sourcePath = params.jenkinsWorkspacePath;
-    this.targetPath = config.apiServer_Path;
-    this.logsPath = config.apiServer_Logs;
+    this.targetPath = config.multigramServer_Path;
+    this.logsPath = config.multigramServer_Logs;
     this.pidPath = `${this.targetPath}/server.pid`;
+    this.branch = params.jenkinsBranchName;
 
     this.jarCommand = `java -Xms16M -Xmx170M ` +
             `-jar "${this.sourcePath}/target/server.jar" ` +
