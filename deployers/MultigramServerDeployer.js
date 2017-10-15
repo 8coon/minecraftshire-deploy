@@ -23,14 +23,16 @@ function MultigramServerDeployer(config, params) {
     this.targetPath = config.multigramServer_Path;
     this.logsPath = config.multigramServer_Logs;
     this.pidPath = `${this.targetPath}/server.pid`;
-    this.branch = params.jenkinsBranchName;
 
-    this.jarCommand = `java -Xms16M -Xmx170M ` +
+    this.branch = params.jenkinsBranchName;
+    this.branch = (this.branch || 'master').split('/')[1] || this.branch || 'master';
+
+    this.jarCommand = `(java -Xms16M -Xmx170M ` +
             `-jar "${this.sourcePath}/target/server.jar" ` +
             `-secret ${params.secretToken} ` +
             `-path ${this.targetPath} ` +
-            `-pid ${this.pidPath} ` +
-            `-log ${this.logsPath}/server.log &`;
+            `> ${this.logsPath}/server.log 2>&1 &` +
+            `) && echo $! > ${this.pidPath} `;
 
     // Порядок выполнения методов
     this.order = ['stop', 'relink', 'start'];
